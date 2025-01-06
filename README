@@ -1,0 +1,61 @@
+// Selecciona el botón de búsqueda por su ID
+const btnBuscar = document.getElementById('btnBuscar');
+
+// Crea una nueva instancia de IntersectionObserver que observa los elementos que entran en el viewport
+const observa = new IntersectionObserver((entra) => {
+    entra.forEach(entry => {
+        // entry.target.classList.toggle('inativo')
+
+        // Si el elemento está intersectando (es visible en el viewport)
+        if (entry.isIntersecting) {
+            // Añade la clase 'activo' al elemento
+            entry.target.classList.add('activo');
+
+            // Deja de observar el elemento una vez que ha entrado en el viewport
+            observa.unobserve(entry.target);
+        } else {
+            // Si el elemento no está intersectando, remueve la clase 'activo'
+            entry.target.classList.remove('activo');
+            // observa.unobserve(entry.target) // cuando ya entre no lo volvera a cargar
+        }
+        console.log(entry);
+    });
+}, { threshold: 0.5 }); // Configura el umbral de intersección al 50%
+
+// Selecciona todas las imágenes en el documento
+const imagen = document.querySelectorAll("img");
+
+// Observa cada imagen
+imagen.forEach(miimg => {
+    observa.observe(miimg);
+});
+
+// Función que se ejecuta cuando se hace clic en el botón de búsqueda
+function searchText() {
+    // Obtiene el valor del campo de texto de búsqueda y lo convierte a minúsculas
+    const textBuscar = document.getElementById('textBuscar').value.toLowerCase();
+    // Selecciona todos los elementos <h2> en el documento
+    const h2 = document.getElementsByTagName('h2');
+
+    // Itera sobre cada elemento <h2>
+    for (let d of h2) {
+        // Si el texto del elemento <h2> incluye el texto de búsqueda
+        if (d.innerText.toLowerCase().includes(textBuscar)) {
+            // Añade la clase 'highlight' al elemento <h2>
+            d.classList.add('highlight');
+            // Desplaza la vista al elemento <h2> de manera suave y lo centra en la vista
+            d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            found = true;
+        } else {
+            // Si el texto del elemento <h2> no incluye el texto de búsqueda, remueve la clase 'highlight'
+            d.classList.remove('highlight');
+            console.log("eliminado");
+        }
+    }
+}
+
+// Añade un evento de clic al botón de búsqueda que ejecuta la función searchText
+btnBuscar.addEventListener('click', searchText);
+
+
+BY Kelvin Jose Familia Adames

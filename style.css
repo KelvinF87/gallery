@@ -10,13 +10,15 @@ header {
     margin-bottom: 20px;
     position: fixed;
     width: 100%;
+    /* display: flex;
+    justify-content: space-around; */
 }
 
 header input {
     border: none;
     border-radius: 3px;
     padding: 8px;
-    width: 300px;
+width: 19rem;
     margin-left: 5px;
 
 }
@@ -45,19 +47,30 @@ header button {
     gap: 7px;
 }
 
-.galeria .caja img {
+.galeria .caja div img {
     opacity: 0;
-    width: 100%;
-    max-width:420px;
+    /* width: 100%; */
+    min-width: 400px;
+    max-width: 420px;
+    
     height: auto;
+    max-height: 200px;
     aspect-ratio: 1, 25;
-    object-fit: contain;
+    object-fit: cover;
     background-color: black;
     border-radius: 10px;
-    box-shadow:  0 0 10px black;
+    box-shadow: 0 0 10px black;
     transition: all 0.8s;
 }
+.galeria .caja div {
+    background-color: rgba(255, 255, 0, 0);
+}
+.galeria .caja div img.activo {
+    opacity: 1;
+}
 
-.galeria .caja img.activo{
-opacity: 1;
+.highlight {
+    background-color: rgb(197, 255, 121);
+    border-radius:0 50px 0 0;
+
 }

@@ -1,3 +1,4 @@
+const btnBuscar = document.getElementById('btnBuscar');
 const observa = new IntersectionObserver((entra)=>{
     entra.forEach(entry=>{
         // entry.target.classList.toggle('inativo')                                                                                      
@@ -22,3 +23,22 @@ imagen.forEach(miimg=>{
     observa.observe(miimg)
 
 })
+
+
+function searchText() {
+    const textBuscar = document.getElementById('textBuscar').value.toLowerCase();
+    const h2 = document.getElementsByTagName('h2');
+
+    for (let d of h2) {
+        if (d.innerText.toLowerCase().includes(textBuscar)) {
+            
+            d.classList.add('highlight');
+            d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            found = true;
+        } else {
+            d.classList.remove('highlight');
+            console.log("eliminado");
+        }
+    }
+}
+btnBuscar.addEventListener('click', searchText);
